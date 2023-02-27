@@ -127,17 +127,17 @@ public class Qyteti {
     public void filloRezervimet() {
         for(Klienti klienti : Klientet) {
             Rezervimi rezervimThread = new Rezervimi(klienti, Hotel);
-            rezervimThread.run();
+            rezervimThread.start();
         }
     }
     public static void main(String args[]) {
-        // instance e klases Qyteti me instance 1 te klases Hoteli
-        Hoteli hotel = new Hoteli("Maradona");
-        Qyteti qytet = new Qyteti(hotel);
-        lexoHapesirat(); // TODO: create files with data
-        lexoKlientet();
-        // lexo hapesirat dhe klientet nga file-at
+        Hoteli hoteli = new Hoteli("Maradona");
+        Qyteti qyteti = new Qyteti(hoteli);
+        qyteti.lexoHapesirat(); // TODO: create files with data
+        qyteti.lexoKlientet();
         // Të fillohet rezervimi dhe vetëm pasi ajo të përfundojë të shkruhen faturat për rezervimet e hotelit.
+        qyteti.filloRezervimet();
+
         // rezervimi perfundon kur ne hotel ska me hapesira
     }
 }
