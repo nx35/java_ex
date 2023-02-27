@@ -10,13 +10,13 @@ public class Klienti {
         Mbiemri = mbiemri;
         gjinia = gjinia.toLowerCase();
         if (gjinia == "m" || gjinia == "mashkull") {
-            Gjinia = "mashkull";
+            Gjinia = "M";
         }
         else if (gjinia == "f" || gjinia == "femer") {
-            Gjinia = "femer";
+            Gjinia = "F";
         }
         else {
-            Gjinia = "tjeter";
+            Gjinia = "O";
         }
         Mosha = mosha;
     }

@@ -23,6 +23,6 @@ public class Restoranti extends Hapesira implements Monitorohet {
     }
 
     public String toString() {
-        return "Restoranti"+super.Nr+"-"+super.Pershkrimi+":"+super.Cmimi+" me kapacitet "+kapaciteti;
+        return "Restoranti"+":"+super.Nr+":"+super.Pershkrimi+":"+super.Cmimi+" me kapacitet "+kapaciteti;
     }
 }

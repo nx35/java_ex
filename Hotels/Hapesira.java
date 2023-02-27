@@ -25,7 +25,7 @@ public abstract class Hapesira {
   public abstract boolean kaWifi();
 
   public String toString() {
-    return Nr+"-"+Pershkrimi+":"+Cmimi;
+    return Nr+":"+Pershkrimi+":"+Cmimi;
   }
   public boolean equals(Hapesira h) {
     return h.getNr() == Nr;

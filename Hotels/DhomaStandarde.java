@@ -29,6 +29,6 @@ public class DhomaStandarde extends Hapesira implements Monitorohet {
             nuk = "";
         else
             nuk = "nuk ";
-        return "DhomaStandarde"+super.Nr+"-"+super.Pershkrimi+":"+super.Cmimi+":"+nuk+"ka TV";
+        return "DhomaStandarde"+":"+super.Nr+":"+super.Pershkrimi+":"+super.Cmimi+":"+nuk+"ka TV";
     }
 }

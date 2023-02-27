@@ -27,6 +27,6 @@ public class DhomaVIP extends Hapesira implements Monitorohet {
             nuk = "";
         else
             nuk = "nuk ";
-        return "DhomaVIP"+super.Nr+"-"+super.Pershkrimi+":"+super.Cmimi+":"+nuk+"ka Gjakuzi";
+        return "DhomaVIP"+":"+super.Nr+":"+super.Pershkrimi+":"+super.Cmimi+":"+nuk+"ka Gjakuzi";
     }
 }

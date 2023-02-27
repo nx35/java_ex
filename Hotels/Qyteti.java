@@ -100,15 +100,42 @@ public class Qyteti {
     }
     public void lexoKlientet() {
         // lexo klientet.txt
-        // shto klientet ne listen e klienteve
-        // formati: <emri>;<gjinia>;<mosha>
-        // injoro rreshtat jovalid
+        File klientetFile = new File("klientet.txt");
+        try {
+            Scanner klientetScanner = new Scanner(klientetFile);
+            String emri;
+            String mbiemri;
+            Char gjinia;
+            int mosha;
+            while(klientetScanner.hasNextLine()) {
+                String klientLine = klientetScanner.nextLine();
+                String[] klientData = klientLine.split(";", 4); // TODO: check if 3 params. if not ignore line
+                emri = klientData[0];
+                mbiemri = klientData[1];
+                gjinia = klientData[2]; // TODO: if invalid ignore line
+                mosha = Integer.ParseInt(klientData[3]); // TODO: if invalid ignore line
+                Klienti klienti = new Klienti(emri, mbiemri, gjinia, mosha);
+                Klientet.add(klienti);
+
+                klientetScanner.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
     public void filloRezervimet() {
-        // duke perdorur klasen e brendshme Rezervimi, secili klient nga lista fillon rezervimin ne hotelne menyre konkurente
+        for(Klienti klienti : Klientet) {
+            Rezervimi rezervimThread = new Rezervimi(klienti, Hotel);
+            rezervimThread.run();
+        }
     }
     public static void main(String args[]) {
         // instance e klases Qyteti me instance 1 te klases Hoteli
+        Hoteli hotel = new Hoteli("Maradona");
+        Qyteti qytet = new Qyteti(hotel);
+        lexoHapesirat(); // TODO: create files with data
+        lexoKlientet();
         // lexo hapesirat dhe klientet nga file-at
         // Të fillohet rezervimi dhe vetëm pasi ajo të përfundojë të shkruhen faturat për rezervimet e hotelit.
         // rezervimi perfundon kur ne hotel ska me hapesira

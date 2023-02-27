@@ -23,6 +23,6 @@ public class SallaPerKonferenca extends Hapesira implements Monitorohet {
     }
 
     public String toString() {
-        return "SallaPerKonferenca"+super.Nr+"-"+super.Pershkrimi+":"+super.Cmimi+" me kapacitet "+kapaciteti;
+        return "SallaPerKonferenca"+":"+super.Nr+":"+super.Pershkrimi+":"+super.Cmimi+" me kapacitet "+kapaciteti;
     }
 }
