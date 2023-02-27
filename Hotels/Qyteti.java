@@ -99,6 +99,23 @@ public class Qyteti {
             Klientet.add(klienti);
     }
     public void lexoKlientet() {
-        
+        // lexo klientet.txt
+        // shto klientet ne listen e klienteve
+        // formati: <emri>;<gjinia>;<mosha>
+        // injoro rreshtat jovalid
+    }
+    public void filloRezervimet() {
+        // duke perdorur klasen e brendshme Rezervimi, secili klient nga lista fillon rezervimin ne hotelne menyre konkurente
+    }
+    public static void main(String args[]) {
+        // instance e klases Qyteti me instance 1 te klases Hoteli
+        // lexo hapesirat dhe klientet nga file-at
+        // Të fillohet rezervimi dhe vetëm pasi ajo të përfundojë të shkruhen faturat për rezervimet e hotelit.
+        // rezervimi perfundon kur ne hotel ska me hapesira
     }
 }
+
+// default checking to throw RezervimiException:
+// positive numbers
+// nonempty strings
+// nonnull objects
