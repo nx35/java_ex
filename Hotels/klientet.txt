@@ -1,0 +1,5 @@
+Filan;Fisteku;M;42
+Filane;Fisteku;F;40
+Khabib;Bokseri;M;33
+Gjenifer;Lopes;F;21
+Ajrore;Gjeliu;O;29

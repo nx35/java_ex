@@ -14,6 +14,8 @@ public class Hoteli {
     private Hashtable<Klienti, ArrayList<Hapesira>> Rezervimet;
 
     public Hoteli(String emri) {
+        Hapesirat = new Vector<Hapesira>();
+        Rezervimet = new Hashtable<Klienti, ArrayList<Hapesira>>();
         Emri = emri;
         Rezervimet = new Hashtable<Klienti, ArrayList<Hapesira>>();
         Radha = new ReentrantLock();

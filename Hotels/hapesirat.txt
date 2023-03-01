@@ -1,0 +1,2 @@
+DhomaStandarde:101:komod:25.0:true
+DhomaVIP:901:full extra:90.0:true

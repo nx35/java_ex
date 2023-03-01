@@ -9,6 +9,7 @@ public class Klienti {
         Emri = emri;
         Mbiemri = mbiemri;
         gjinia = gjinia.toLowerCase();
+        System.out.println("---"+gjinia+"-----");
         if (gjinia == "m" || gjinia == "mashkull") {
             Gjinia = "M";
         }

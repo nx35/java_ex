@@ -10,6 +10,7 @@ public class Qyteti {
 
     public Qyteti(Hoteli h) {
         Hotel = h;
+        Klientet = new ArrayList<Klienti>();
     }
     private class Rezervimi extends Thread {
         private Hoteli Hotel;
@@ -22,7 +23,7 @@ public class Qyteti {
             while (Hotel.kaHapesira()) {
                 Klient.rezervo(Hotel);
                 Random random = new Random();
-                long rand = random.nextLong(1500L - 250L) + 250L;
+                int rand = random.nextInt(1250) + 250;
                 try {
                     Thread.sleep(rand);
                 } catch (InterruptedException e) {
@@ -100,12 +101,13 @@ public class Qyteti {
     }
     public void lexoKlientet() {
         // lexo klientet.txt
+        System.out.println("--------------");//dubg
         File klientetFile = new File("klientet.txt");
         try {
             Scanner klientetScanner = new Scanner(klientetFile);
             String emri;
             String mbiemri;
-            Char gjinia;
+            String gjinia;
             int mosha;
             while(klientetScanner.hasNextLine()) {
                 String klientLine = klientetScanner.nextLine();
@@ -113,12 +115,12 @@ public class Qyteti {
                 emri = klientData[0];
                 mbiemri = klientData[1];
                 gjinia = klientData[2]; // TODO: if invalid ignore line
-                mosha = Integer.ParseInt(klientData[3]); // TODO: if invalid ignore line
+                mosha = Integer.parseInt(klientData[3]); // TODO: if invalid ignore line
                 Klienti klienti = new Klienti(emri, mbiemri, gjinia, mosha);
+                System.out.println(klienti); // DEBUG
                 Klientet.add(klienti);
-
-                klientetScanner.close();
             }
+            klientetScanner.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
@@ -126,7 +128,7 @@ public class Qyteti {
     }
     public void filloRezervimet() {
         for(Klienti klienti : Klientet) {
-            Rezervimi rezervimThread = new Rezervimi(klienti, Hotel);
+            Rezervimi rezervimThread = new Rezervimi(Hotel, klienti);
             rezervimThread.start();
         }
     }
