@@ -126,20 +126,33 @@ public class Qyteti {
             e.printStackTrace();
         }
     }
-    public void filloRezervimet() {
+    public boolean filloRezervimet() throws InterruptedException { //this implementation of join might be out of spec, since the requirement statet to continue with Faturo() after waiting for the threads to finish... inside the main function. and that filloRezervimet() should be void? 
+        // alt implementation
+        ArrayList<Rezervimi> rezervimet = new ArrayList<Rezervimi>();
         for(Klienti klienti : Klientet) {
             Rezervimi rezervimThread = new Rezervimi(Hotel, klienti);
+            rezervimet.add(rezervimThread);
             rezervimThread.start();
         }
+        for(Rezervimi rezervimi : rezervimet) {
+            rezervimi.join();
+        }
+        return true;
     }
     public static void main(String args[]) {
         Hoteli hoteli = new Hoteli("Maradona");
         Qyteti qyteti = new Qyteti(hoteli);
         qyteti.lexoHapesirat(); // TODO: create files with data
         qyteti.lexoKlientet();
-        // Të fillohet rezervimi dhe vetëm pasi ajo të përfundojë të shkruhen faturat për rezervimet e hotelit.
-        qyteti.filloRezervimet();
-
+        try {
+        // pasi te perfundoje rezervimi faturo rezervimet
+        boolean finished = qyteti.filloRezervimet();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(""+hoteli.getRezervimet()); // debug
+        hoteli.faturo();
         // rezervimi perfundon kur ne hotel ska me hapesira
     }
 }
