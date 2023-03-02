@@ -58,10 +58,10 @@ public class Hoteli {
     }
     public void faturo() {
         Enumeration<Klienti> klientet = Rezervimet.keys();
-        Enumeration<ArrayList<Hapesira>> hapesirat = Rezervimet.elements();
+        //Enumeration<ArrayList<Hapesira>> hapesirat = Rezervimet.elements();
         while(klientet.hasMoreElements()) {
             Klienti klienti = klientet.nextElement();
-            ArrayList<Hapesira> hapesiratR = hapesirat.nextElement();
+            ArrayList<Hapesira> hapesiratR = Rezervimet.get(klienti);
             String filename = klienti.getEmri()+"_"+klienti.getMbiemri()+".txt";
 
             // create file
@@ -84,7 +84,7 @@ public class Hoteli {
                 FileWriter klientFileWriter = new FileWriter(filename);
 
                 klientFileWriter.write("Klienti: "+klienti.getEmri()+" "+klienti.getMbiemri()+" - "+klienti.getGjinia()+" "+klienti.getMosha()+" vjec");
-                String breakLine = "------------------------------------------------------------------------";
+                String breakLine = "\n------------------------------------------------------------------------\n";
                 klientFileWriter.write(breakLine);
                 int numberHapesira = hapesiratR.size();
                 klientFileWriter.write("Numri i hapesirave te rezervuara: "+numberHapesira);
@@ -92,7 +92,7 @@ public class Hoteli {
                 double total = 0;
                 for(Hapesira hapesira: hapesiratR) {
                     total+=hapesira.Cmimi;
-                    klientFileWriter.write(hapesira.toString());
+                    klientFileWriter.write(hapesira.toString()+"\n");
                 }
                 klientFileWriter.write(breakLine);
                 klientFileWriter.write("Totali: "+total);

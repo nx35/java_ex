@@ -21,7 +21,12 @@ public class Qyteti {
         }
         public void run() {
             while (Hotel.kaHapesira()) {
-                Klient.rezervo(Hotel);
+                try {
+                    Klient.rezervo(Hotel);
+                }
+                catch (NukKaHapesiraException e) {
+                    break;
+                }
                 Random random = new Random();
                 int rand = random.nextInt(1250) + 250;
                 try {
@@ -51,24 +56,23 @@ public class Qyteti {
                 int numri = Integer.parseInt(HapesiraData[1]); // TODO: if not int skip line
                 String pershkrimi = HapesiraData[2];
                 double cmimi = Double.parseDouble(HapesiraData[3]); // TODO: if not double skip line
-
                 switch(llojiHapesires) {
                     case "DhomaStandarde":
                         boolean kaTV;
-                        if (HapesiraData[4]=="false")
+                        if (HapesiraData[4].equals("false"))
                             kaTV = false;
-                        else if (HapesiraData[4]=="true")
+                        else if (HapesiraData[4].equals("true"))
                             kaTV = true;
                         else
-                            continue;
+                            continue;   
                         DhomaStandarde dhomaStandarde = new DhomaStandarde(kaTV, numri, pershkrimi, cmimi);
                         Hotel.shtoHapesiren(dhomaStandarde);
                         break;
                     case "DhomaVIP":
                         boolean kaGjakuzi;
-                        if (HapesiraData[4]=="false")
+                        if (HapesiraData[4].equals("false"))
                             kaGjakuzi = false;
-                        else if (HapesiraData[4]=="true")
+                        else if (HapesiraData[4].equals("true"))
                             kaGjakuzi = true;
                         else
                             continue;
@@ -101,7 +105,6 @@ public class Qyteti {
     }
     public void lexoKlientet() {
         // lexo klientet.txt
-        System.out.println("--------------");//dubg
         File klientetFile = new File("klientet.txt");
         try {
             Scanner klientetScanner = new Scanner(klientetFile);
@@ -117,7 +120,6 @@ public class Qyteti {
                 gjinia = klientData[2]; // TODO: if invalid ignore line
                 mosha = Integer.parseInt(klientData[3]); // TODO: if invalid ignore line
                 Klienti klienti = new Klienti(emri, mbiemri, gjinia, mosha);
-                System.out.println(klienti); // DEBUG
                 Klientet.add(klienti);
             }
             klientetScanner.close();
@@ -145,15 +147,14 @@ public class Qyteti {
         qyteti.lexoHapesirat(); // TODO: create files with data
         qyteti.lexoKlientet();
         try {
-        // pasi te perfundoje rezervimi faturo rezervimet
         boolean finished = qyteti.filloRezervimet();
         }
         catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(""+hoteli.getRezervimet()); // debug
+        System.out.println("====== Nuk ka me hapesira te lira.\nFillo Faturimin");
         hoteli.faturo();
-        // rezervimi perfundon kur ne hotel ska me hapesira
+        System.out.println("Mbaroi faturimi");
     }
 }
 

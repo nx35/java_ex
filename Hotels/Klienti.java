@@ -9,11 +9,10 @@ public class Klienti {
         Emri = emri;
         Mbiemri = mbiemri;
         gjinia = gjinia.toLowerCase();
-        System.out.println("---"+gjinia+"-----");
-        if (gjinia == "m" || gjinia == "mashkull") {
+        if (gjinia.equals("m") || gjinia.equals("mashkull")) {
             Gjinia = "M";
         }
-        else if (gjinia == "f" || gjinia == "femer") {
+        else if (gjinia.equals("f") || gjinia.equals("femer")) {
             Gjinia = "F";
         }
         else {
@@ -41,13 +40,19 @@ public class Klienti {
         return h.Radha.tryLock();
     }
 
-    public void rezervo(Hoteli h) {
+    public void rezervo(Hoteli h) throws NukKaHapesiraException {
         if (merreRadhen(h)) {
             h.Radha.lock();
             Hapesira hapesira = h.rezervoHapesiren(this);
-            HapesiratERezervuara.add(hapesira);
+            if (hapesira == null) {
+                throw new NukKaHapesiraException("Nuk ka hapesire te lire per te rezervuar");
+            }
+            else {
+                System.out.println("rezervo(): "+hapesira);
+                //HapesiratERezervuara.add(hapesira);
+                System.out.println(Emri+" "+Mbiemri+" rezervoi me sukses hapesiren "+hapesira.toString()+" ne hotelin "+h.getEmri());
+            }
             h.Radha.unlock();
-            System.out.println(Emri+" "+Mbiemri+"rezervoi me sukses hapesiren "+hapesira.toString()+" ne hotelin "+h.getEmri());
         }
         else {
             System.out.println(Emri+" "+Mbiemri+" nuk e mori radhen ne hotelin "+h.getEmri());
