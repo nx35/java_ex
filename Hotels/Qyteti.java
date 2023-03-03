@@ -21,18 +21,18 @@ public class Qyteti {
         }
         public void run() {
             while (Hotel.kaHapesira()) {
-                try {
-                    Klient.rezervo(Hotel);
-                }
-                catch (NukKaHapesiraException e) {
-                    break;
-                }
                 Random random = new Random();
                 int rand = random.nextInt(1250) + 250;
                 try {
                     Thread.sleep(rand);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                try {
+                    Klient.rezervo(Hotel);
+                }
+                catch (NukKaHapesiraException e) {
+                    break;
                 }
             }
         }

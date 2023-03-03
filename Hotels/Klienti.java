@@ -43,6 +43,7 @@ public class Klienti {
     public void rezervo(Hoteli h) throws NukKaHapesiraException {
         if (merreRadhen(h)) {
             h.Radha.lock();
+            System.out.println("*******>"+this.getEmri()+" mori radhen");
             Hapesira hapesira = h.rezervoHapesiren(this);
             if (hapesira == null) {
                 throw new NukKaHapesiraException("Nuk ka hapesire te lire per te rezervuar");
@@ -53,6 +54,7 @@ public class Klienti {
                 System.out.println(Emri+" "+Mbiemri+" rezervoi me sukses hapesiren "+hapesira.toString()+" ne hotelin "+h.getEmri());
             }
             h.Radha.unlock();
+            System.out.println("------>"+this.getEmri()+" e leshoi radhen");
         }
         else {
             System.out.println(Emri+" "+Mbiemri+" nuk e mori radhen ne hotelin "+h.getEmri());
